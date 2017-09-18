@@ -1,4 +1,4 @@
-package snippets.jee.entity;
+package snippets.jee.dto;
 
 /**
  * 用户类
