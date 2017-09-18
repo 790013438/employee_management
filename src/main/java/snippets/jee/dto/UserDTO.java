@@ -5,7 +5,7 @@ package snippets.jee.dto;
  * @author 程淼
  * 
  */
-public class User {
+public class UserDTO {
 
     private String username;
     private String password;
