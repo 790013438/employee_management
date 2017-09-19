@@ -17,7 +17,7 @@ public interface UserDAO {
      * @return 用户对象
      * @throws SQLException 
      */
-    public UserDTO getUser (String name) throws SQLException;
+    public UserDTO getUser (String name);
 
     /**
      * 保存用户

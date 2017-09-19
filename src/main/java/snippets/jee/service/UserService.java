@@ -17,7 +17,7 @@ public interface UserService {
      * @return 登录成功返回true
      * @throws SQLException 
      */
-    boolean login (String username, String password) throws SQLException;
+    boolean login (String username, String password);
     
     /**
      * 注册

@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDao = new UserDAOImpl();
 
     @Override
-    public boolean login(String username, String password) throws SQLException {
+    public boolean login(String username, String password) {
         UserDTO temp = userDao.getUser(username);
         if (temp != null) {
             String md5 = DigestUtils.md5Hex(password);

@@ -25,24 +25,25 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public UserDTO getUser(String name) throws SQLException {
+    public UserDTO getUser(String name) {
         UserDTO user = null;
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql:///hrs", "user1", "37934bit");
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from tb_user where username=?");
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+        try (Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql:///hrs", "root", "123456")) {
+            PreparedStatement stmt = connection.prepareStatement(
+                    "select password, email from tb_user where username=?");
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
                 user = new UserDTO();
                 user.setUsername(name);
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
             }
-        } finally {
-            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+        return user;
+
     }
 
     @Override
