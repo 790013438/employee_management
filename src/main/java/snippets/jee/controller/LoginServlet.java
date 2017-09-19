@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import snippets.jee.service.UserService;
+import snippets.jee.service.impl.UserServiceImpl;
+
 @WebServlet(urlPatterns="/login", loadOnStartup = 1)
 public class LoginServlet extends HttpServlet {
 

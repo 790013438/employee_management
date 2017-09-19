@@ -1,5 +1,7 @@
 package snippets.jee.service;
 
+import java.sql.SQLException;
+
 import snippets.jee.dto.UserDTO;
 
 /**
@@ -13,13 +15,15 @@ public interface UserService {
      * @param username 用户名
      * @param password 密码
      * @return 登录成功返回true
+     * @throws SQLException 
      */
-    boolean login (String username, String password);
+    boolean login (String username, String password) throws SQLException;
     
     /**
      * 注册
      * @param user 用户对象
      * @return 注册成功返回true
+     * @throws SQLException 
      */
-    boolean register (UserDTO user);
+    boolean register (UserDTO user) throws SQLException;
 }
