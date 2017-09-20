@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
     public UserDTO getUser(String name) {
         UserDTO user = null;
         try (Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql:///hrs", "root", "123456")) {
+                    "jdbc:mysql:///hrs", "user1", "37934bit")) {
             PreparedStatement stmt = connection.prepareStatement(
                     "select password, email from tb_user where username=?");
             stmt.setString(1, name);

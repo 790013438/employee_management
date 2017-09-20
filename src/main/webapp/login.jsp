@@ -9,8 +9,10 @@
         <h1>用户登录</h1>
         <hr/>
         <form action="login" method="post">
-            <input type="text" name="username" placeholder="请输入用户名"/>
-            <input type="password" name="password" placeholder="请输入密码"/>
+            <input type="text" name="username" placeholder="请输入用户名" required="required"/>
+            <br/><br/>
+            <input type="password" name="password" placeholder="请输入密码" required="required"/>
+            <br/><br/>
             <input type="submit" value="登录">
         </form>
     </body>
