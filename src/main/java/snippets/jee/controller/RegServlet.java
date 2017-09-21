@@ -40,4 +40,9 @@ public class RegServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        httpServletRequest.getRequestDispatcher("register.jsp").forward(httpServletRequest, httpServletResponse);
+    }
+
 }
