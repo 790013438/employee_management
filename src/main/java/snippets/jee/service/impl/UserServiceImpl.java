@@ -1,7 +1,5 @@
 package snippets.jee.service.impl;
 
-import java.sql.SQLException;
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import snippets.jee.dao.UserDAO;
@@ -23,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean register(UserDTO user) throws SQLException {
+    public boolean register(UserDTO user) {
         UserDTO temp = userDao.getUser(user.getUsername());
         if (temp == null) {
             String md5 = DigestUtils.md5Hex(user.getPassword());

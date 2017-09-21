@@ -25,5 +25,5 @@ public interface UserService {
      * @return 注册成功返回true
      * @throws SQLException 
      */
-    boolean register (UserDTO user) throws SQLException;
+    boolean register (UserDTO user) throws RuntimeException;
 }
