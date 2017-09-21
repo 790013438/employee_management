@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import snippets.jee.service.UserService;
 import snippets.jee.service.impl.UserServiceImpl;
 
-@WebServlet(urlPatterns="/login", loadOnStartup = 1)
+@WebServlet(value="/login", loadOnStartup=1)
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +33,11 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("hint", "请输入有效的登录信息!");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("login.jsp");
     }
 
 }
