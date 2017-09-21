@@ -16,7 +16,7 @@ import snippets.jee.util.DBResourceManager;
 public class UserDAOImpl implements UserDAO {
 
     private static final String SELECT_USER_SQL = "select password, email from tb_user where username=?";
-    private static final String INSERT_USER_SQL = "insert into tb_user values (?,?,?)";
+    private static final String INSERT_USER_SQL = "insert into tb_user(username, password, email) values (?,?,?)";
 
     @Override
     public UserDTO getUser(String name) {
