@@ -19,5 +19,6 @@
             <br/><br/>
             <input type="submit" value="登录">
         </form>
+        <a href="reg">现在就注册</a>
     </body>
 </html>
