@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public final class DBResourceManager {
     private static final String DRV = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql:///hrs";
+    private static final String URL = "jdbc:mysql:///hrs?characterEncoding=utf8";
     private static final String UID = "user1";
     private static final String PWD = "37934bit";
 
