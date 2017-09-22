@@ -77,9 +77,6 @@ public final class DBResourceManager {
             for (int i = 0; i < params.length; ++i) {
                 stmt.setObject(i + 1, params[i]);
             }
-            //2
-            System.out.println(stmt);
-            ///233
             return stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
