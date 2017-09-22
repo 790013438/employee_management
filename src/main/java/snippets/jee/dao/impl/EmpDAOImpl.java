@@ -11,7 +11,7 @@ import snippets.jee.dao.EmpDAO;
 import snippets.jee.dto.Emp;
 import snippets.jee.util.DBResourceManager;
 
-public class EmpDAOImple implements EmpDAO {
+public class EmpDAOImpl implements EmpDAO {
     private static final String SELECT_EMP_BY_DEPT_SQL = 
         "select eno, ename, esex, ejob, estatus, etel from tb_emp where dno=?";
     private static final String INSERT_EMP_SQL =
