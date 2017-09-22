@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public final class DBResourceManager {
     private static final String DRV = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql:///hrs";
+    private static final String URL = "jdbc:mysql:///hrs?characterEncoding=utf8";
     private static final String UID = "user1";
     private static final String PWD = "37934bit";
 
@@ -77,6 +77,9 @@ public final class DBResourceManager {
             for (int i = 0; i < params.length; ++i) {
                 stmt.setObject(i + 1, params[i]);
             }
+            //2
+            System.out.println(stmt);
+            ///233
             return stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
