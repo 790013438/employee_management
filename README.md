@@ -11,3 +11,7 @@ Data transfer object，material delivery aim
 ### material deliver aim
 ### material interview aim
 ## view
+### ajax，jQuery
+用这些完成部门的删除操作
+### filter
+类似spring的interceptor
