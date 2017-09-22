@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter
@@ -27,10 +28,9 @@ public class AuthenticationFilter implements Filter {
     public void destroy() {
     }
 
-    /**
-     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-     */
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse resp, 
+            FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         String servletPath = request.getServletPath();
         if (servletPath.equals("/dept") || servletPath.equals("/delDept") ||
@@ -38,7 +38,7 @@ public class AuthenticationFilter implements Filter {
             if (request.getSession().getAttribute("username") != null) {
                 chain.doFilter(req, resp);
             } else {
-                request.setAttribute("hint", "ÇëÏÈµÇÂ¼!!!");
+                request.setAttribute("hint", "未登录!!!");
                 request.getRequestDispatcher("login.jsp").forward(req, resp);
             }
         } else {
