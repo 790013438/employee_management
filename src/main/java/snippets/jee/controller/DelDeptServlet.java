@@ -1,30 +1,27 @@
 package snippets.jee.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import snippets.jee.service.DeptService;
-import snippets.jee.service.impl.DeptServiceImpl;
-
 @WebServlet(value="/delDept")
-public class DelDeptServlet extends HttpServlet {
+public class DelDeptServlet extends BaseServlet {
 
     private static final long serialVersionUID = 1L;
-
-    private DeptService deptService = new DeptServiceImpl();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String noString = req.getParameter("no");
         if (noString != null) {
             int no = Integer.parseInt(noString);
-            deptService.removeDeptByNo(no);
+            String responseTextString = getDeptService().removeDeptByNo(no) ? "sucess" : "failed";
+            PrintWriter printWriter = resp.getWriter();
+            printWriter.write(responseTextString);
+            printWriter.close();
         }
-        resp.sendRedirect("dept");
     }
 }

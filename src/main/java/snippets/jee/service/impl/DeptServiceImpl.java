@@ -24,4 +24,8 @@ private DeptDAO deptDAO = new DeptDAOImpl();
         return false;
     }
 
+    @Override
+    public boolean addNewDept (Dept dept) {
+        return deptDAO.save(dept);
+    }
 }
