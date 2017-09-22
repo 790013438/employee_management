@@ -7,6 +7,13 @@ import snippets.jee.dto.Dept;
 public interface DeptService {
 
     /**
+     * 添加新部门
+     * @param dept 部门对象
+     * @return 添加成功返回true否则返回false
+     */
+    boolean addNewDept(Dept dept);
+
+    /**
      * 删除部门
      * @param no 部门编号
      * @return 删除成功返回true否则返回false

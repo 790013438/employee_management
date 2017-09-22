@@ -4,19 +4,15 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import snippets.jee.dto.UserDTO;
-import snippets.jee.service.UserService;
-import snippets.jee.service.impl.UserServiceImpl;
 
 @WebServlet(value="/reg")
-public class RegServlet extends HttpServlet {
+public class RegServlet extends BaseServlet {
 
     private static final long serialVersionUID = 1L;
-    private UserService userService = new UserServiceImpl();
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +24,7 @@ public class RegServlet extends HttpServlet {
             user.setUsername(username);
             user.setPassword(password);
             user.setEmail(email);
-            if (userService.register(user)) {
+            if (getUserService().register(user)) {
                 resp.sendRedirect("login.jsp");
             } else {
                 req.setAttribute("hint", "注册失败! 请尝试更换用户名!");
