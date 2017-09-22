@@ -18,7 +18,7 @@ public class DelDeptServlet extends BaseServlet {
         String noString = req.getParameter("no");
         if (noString != null) {
             int no = Integer.parseInt(noString);
-            String responseTextString = getDeptService().removeDeptByNo(no) ? "sucess" : "failed";
+            String responseTextString = getDeptService().removeDeptByNo(no) ? "success" : "failed";
             PrintWriter printWriter = resp.getWriter();
             printWriter.write(responseTextString);
             printWriter.close();
