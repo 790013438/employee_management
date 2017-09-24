@@ -3,6 +3,7 @@ package snippets.jee.controller;
 import javax.servlet.http.HttpServlet;
 
 import snippets.jee.service.DeptService;
+import snippets.jee.service.EmpService;
 import snippets.jee.service.UserService;
 import snippets.jee.service.impl.ServiceFactory;
 
@@ -22,5 +23,12 @@ public class BaseServlet extends HttpServlet {
      */
     protected DeptService getDeptService() {
         return ServiceFactory.create(DeptService.class);
+    }
+
+    /**
+     * 获取员工业务对象
+     */
+    protected EmpService getEmpService() {
+        return ServiceFactory.create(EmpService.class);
     }
 }
