@@ -39,7 +39,7 @@ public class AuthenticationFilter implements Filter {
         //do nothing, else we will execute the request in loop
         //Intercept only if request is not /login
         if (!(contextString + "/login").equals(httpServletRequest.getRequestURI()) && 
-                !(contextString + "/reg").equals(httpServletRequest.getRequestURI()) || 
+                !(contextString + "/reg").equals(httpServletRequest.getRequestURI()) && 
                 httpServletRequest.getSession().getAttribute("username") == null) {
                 //User is not logged in. Redirect to /login
                 ((HttpServletResponse)resp).sendRedirect(httpServletRequest.getContextPath() + "/login");
