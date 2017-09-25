@@ -45,7 +45,7 @@
                         </table>
                     </c:if>
                     <a href="dept">返回部门列表</a>
-                    <a href="add_emp?dno=${deptNo}">新增员工</a>
+                    <a href="addEmp?dno=${deptNo}">新增员工</a>
                 </div>
             </div>
         </div>

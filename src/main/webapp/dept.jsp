@@ -36,7 +36,7 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <a href="add_dept.jsp">新增部门</a>
+                    <a href="addDept">新增部门</a>
                 </div>
             </div>
         </div>
