@@ -31,7 +31,6 @@ public class AddEmpServlet extends BaseServlet {
         String job = httpServletRequest.getParameter("job");
         double salary = Double.parseDouble(httpServletRequest.getParameter("salary"));
         String hireDateStr = httpServletRequest.getParameter("hiredate");
-        System.out.println(hireDateStr);
         Date hireDate = CommonUtil.stringToDate("yyyy-MM-dd", hireDateStr);
         String tel = httpServletRequest.getParameter("tel");
         Emp emp = new Emp();
@@ -47,7 +46,7 @@ public class AddEmpServlet extends BaseServlet {
         emp.setMgr(mgr);
         Part part = httpServletRequest.getPart("photo");
         if (part.getSize() > 0) {
-            String newFilename = CommonUtil.getUniqueFilename() + "png";
+            String newFilename = CommonUtil.getUniqueFilename() + ".png";
             String path = httpServletRequest.getServletContext().getRealPath("/images");
             File file = new File(path + "/" + newFilename);
             CommonUtil.compressImage(part.getInputStream(), file, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
