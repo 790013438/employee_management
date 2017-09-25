@@ -49,6 +49,7 @@ public class AddEmpServlet extends BaseServlet {
             String newFilename = CommonUtil.getUniqueFilename() + ".png";
             String path = httpServletRequest.getServletContext().getRealPath("/images");
             File file = new File(path + "/" + newFilename);
+            file.mkdir();
             CommonUtil.compressImage(part.getInputStream(), file, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
             emp.setPhoto(newFilename);
         }

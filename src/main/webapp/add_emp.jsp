@@ -30,14 +30,14 @@
             <br><br>
             <input type="number" name="salary" required placeholder="请输入员工月薪">
             <br><br>
-            <input type="date" name="hiredate">
+            <input type="date" required="required" name="hiredate">
             <br><br>
             <input id="photo" type="file" name="photo">
             <img id="photoPreview" src="" alt="">
             <br><br>
             <input type="tel" name="tel" placeholder="请输入员工电话">
             <br><br>
-            <input type="hidden" name="dno" value="${param.dno}">
+            <input type="hidden" name="dno" required="required" value="${param.dno}">
             <input type="submit" value="确定">
         </form>
         <a href="dept">返回部门列表</a>

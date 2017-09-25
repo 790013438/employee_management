@@ -15,7 +15,7 @@ public class EmpDAOImpl implements EmpDAO {
     private static final String SELECT_EMP_BY_DEPT_SQL = 
         "select eno, ename, esex, ejob, estatus, etel from tb_emp where tb_dept_id=?";
     private static final String INSERT_EMP_SQL =
-        "insert into tb_emp values (?,?,?,?,?,?,?,?,?,?,?)";
+        "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     @Override
     public List<Emp> findEmpsByDeptNo(Integer no) {
@@ -46,9 +46,9 @@ public class EmpDAOImpl implements EmpDAO {
         try {
             return DBResourceManager.executeUpdate(connection, INSERT_EMP_SQL, 
                     emp.getNo(), emp.getName(), emp.getSex(),
-                    emp.getJob(), emp.getMgr().getNo(), emp.getSalary(), 
+                    emp.getJob(), emp.getMgr().getId(), emp.getSalary(), 
                     emp.getHireDate(), emp.getStatus(), emp.getPhoto(), 
-                    emp.getTel(), emp.getDept().getNo()) == 1;
+                    emp.getTel(), emp.getDept().getId()) == 1;
         } finally {
             DBResourceManager.closeConnection(connection);
         }
