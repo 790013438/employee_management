@@ -1,8 +1,7 @@
 package snippets.jee.dao;
 
-import java.util.List;
-
 import snippets.jee.dto.Emp;
+import snippets.jee.util.PageBean;
 
 public interface EmpDAO {
 
@@ -11,7 +10,7 @@ public interface EmpDAO {
      * @param no 部门编号
      * @return 保存员工对象的列表容器
      */
-    List<Emp> findEmpsByDeptNo(Integer no);
+    PageBean<Emp> findEmpsByDeptNo(Integer no, int page, int size);
 
     /**
      * 保存员工

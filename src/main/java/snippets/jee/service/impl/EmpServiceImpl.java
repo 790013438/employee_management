@@ -1,11 +1,10 @@
 package snippets.jee.service.impl;
 
-import java.util.List;
-
 import snippets.jee.dao.EmpDAO;
 import snippets.jee.dao.impl.EmpDAOImpl;
 import snippets.jee.dto.Emp;
 import snippets.jee.service.EmpService;
+import snippets.jee.util.PageBean;
 
 public class EmpServiceImpl implements EmpService {
     private EmpDAO empDao = new EmpDAOImpl();
@@ -16,7 +15,7 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public List<Emp> listAllEmpsByDeptNo(Integer no) {
-        return empDao.findEmpsByDeptNo(no);
+    public PageBean<Emp> listAllEmpsByDeptNo(Integer no, int page, int size) {
+        return empDao.findEmpsByDeptNo(no, page, size);
     }
 }
