@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import snippets.jee.service.DeptService;
+import snippets.jee.service.EmpService;
 import snippets.jee.service.UserService;
 
 public class ServiceFactory {
@@ -13,6 +14,7 @@ public class ServiceFactory {
     static {
         map.put(UserService.class, new UserServiceImpl());
         map.put(DeptService.class, new DeptServiceImpl());
+        map.put(EmpService.class, new EmpServiceImpl());
     }
 
     private ServiceFactory() {
