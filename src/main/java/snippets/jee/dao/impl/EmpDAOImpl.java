@@ -13,7 +13,7 @@ import snippets.jee.util.DBResourceManager;
 
 public class EmpDAOImpl implements EmpDAO {
     private static final String SELECT_EMP_BY_DEPT_SQL = 
-        "select eno, ename, esex, ejob, estatus, etel from tb_emp where dno=?";
+        "select eno, ename, esex, ejob, estatus, etel from tb_emp where tb_dept_id=?";
     private static final String INSERT_EMP_SQL =
         "insert into tb_emp values (?,?,?,?,?,?,?,?,?,?,?)";
 

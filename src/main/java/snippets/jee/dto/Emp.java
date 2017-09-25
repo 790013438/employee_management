@@ -7,6 +7,7 @@ public class Emp implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
     private Integer no;                // 编号
     private String name;            // 姓名
     private Boolean sex;            // 性别
@@ -87,6 +88,12 @@ public class Emp implements Serializable {
     }
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
