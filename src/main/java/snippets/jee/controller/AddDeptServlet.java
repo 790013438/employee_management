@@ -37,4 +37,9 @@ public class AddDeptServlet extends BaseServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        httpServletRequest.getRequestDispatcher("add_dept.jsp").forward(httpServletRequest, httpServletResponse);
+    }
+
 }

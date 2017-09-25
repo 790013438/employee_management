@@ -6,6 +6,7 @@ package snippets.jee.dto;
  */
 public class Dept {
 
+    private Integer id;
     private Integer no;
     private String name;
     private String location;
@@ -27,6 +28,12 @@ public class Dept {
     }
     public void setLocation(String location) {
         this.location = location;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
