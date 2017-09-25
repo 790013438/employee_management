@@ -35,6 +35,11 @@ public class Emp implements Serializable {
     public Boolean getSex() {
         return sex;
     }
+
+    public String getSexStr() {
+        return sex ? "男" : "女";
+    }
+
     public void setSex(Boolean sex) {
         this.sex = sex;
     }

@@ -31,7 +31,7 @@
                                 <tr id="tr${emp.no}">
                                     <td>${emp.no}</td>
                                     <td>${emp.name}</td>
-                                    <td>${emp.sex}</td>
+                                    <td>${emp.sexStr}</td>
                                     <td>${emp.job}</td>
                                     <td>${emp.status ? "在职" : "离职"}</td>
                                     <td>${emp.tel}</td>
@@ -45,7 +45,7 @@
                         </table>
                     </c:if>
                     <a href="dept">返回部门列表</a>
-                    <a href="add_emp">新增员工</a>
+                    <a href="add_emp?dno=${deptNo}">新增员工</a>
                 </div>
             </div>
         </div>
