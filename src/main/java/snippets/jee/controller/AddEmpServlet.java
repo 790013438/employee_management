@@ -55,7 +55,7 @@ public class AddEmpServlet extends BaseServlet {
         }
         int deptNo = Integer.parseInt(httpServletRequest.getParameter("dno"));
         Dept dept = new Dept();
-        dept.setNo(deptNo);
+        dept.setId(deptNo);
         emp.setDept(dept);
         if (getEmpService().addNewEmp(emp)) {
             resp.sendRedirect("emp?no=" + deptNo);
