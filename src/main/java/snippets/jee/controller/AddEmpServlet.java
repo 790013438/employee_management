@@ -61,4 +61,9 @@ public class AddEmpServlet extends BaseServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        httpServletRequest.getRequestDispatcher("add_emp.jsp").forward(httpServletRequest, httpServletResponse);
+    }
+
 }
