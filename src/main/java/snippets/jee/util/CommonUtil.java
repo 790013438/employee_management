@@ -1,14 +1,37 @@
 package snippets.jee.util;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
 public final class CommonUtil {
 
     private CommonUtil() {
         throw new AssertionError();
+    }
+
+    /**
+     * 压缩图片(将图片按照指定的尺寸写为PNG格式的图片)
+     * @param inputStream 图片二进制数据输入流
+     * @param file 目标文件
+     * @param width 压缩后的宽度
+     * @param height 压缩后的高度
+     * @throws IOException 读写文件时可能引发IOException
+     */
+    public static void compressImage(InputStream inputStream, File file, 
+            int width, int height) throws IOException {
+        BufferedImage oldImage = ImageIO.read(inputStream);
+        BufferedImage newImage = new BufferedImage(width, height, 
+                BufferedImage.TYPE_INT_RGB);
+        newImage.getGraphics().drawImage(oldImage, 0, 0, width, height, null);
+        ImageIO.write(newImage, "PNG", file);
     }
 
     /**

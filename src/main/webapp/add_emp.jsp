@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Insert title here</title>
+        <style>
+            #photoPreview {
+                border: 1px dashed #ccc;
+                display: block;
+                width: 150px;
+                height: 150px;
+            }
+        </style>
     </head>
     <body>
         <h1>新增员工</h1>
@@ -22,12 +31,38 @@
             <input type="number" name="salary" required placeholder="请输入员工月薪">
             <br><br>
             <input type="date" name="hiredate">
-            <input type="file" name="photo">
+            <br><br>
+            <input id="photo" type="file" name="photo">
+            <img id="photoPreview" src="" alt="">
             <br><br>
             <input type="tel" name="tel" placeholder="请输入员工电话">
+            <br><br>
             <input type="hidden" name="dno" value="${param.dno}">
             <input type="submit" value="确定">
         </form>
         <a href="dept">返回部门列表</a>
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(function() {
+                $('#photo').on('change', function() {
+                    if (window.FileReader) {
+                        var file = this.files[0];
+                        if (/image\/\w+/.test(file.type)) {
+                            var fr = new FileReader();
+                            fr.onloadend = function(evt) { 
+                                $('#photoPreview').attr('src', evt.target.result);
+                            };
+                            fr.readAsDataURL(file);
+                        } else {
+                            $(this).val('');
+                            $('#photoPreview').attr('src', '');
+                            alert("请选择图片文件");
+                        }
+                    } else {
+                        alert("浏览器不支持文件预览!");
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
