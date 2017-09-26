@@ -16,7 +16,7 @@ public class DeptDAOImpl implements DeptDAO {
     private static final String SELECT_DEPT_SQL = "select dname, dloc from tb_dept where id=?";
     private static final String SELECT_ALL_DEPT_SQL = "select id, dno, dname, dloc from tb_dept";
     private static final String INSERT_DEPT_SQL = "insert into tb_dept(dno, dname, dloc) values (?,?,?)";
-    private static final String DELETE_DEPT_SQL = "delete from tb_dept where dno=?";
+    private static final String DELETE_DEPT_SQL = "delete from tb_dept where id=?";
     private static final String UPDATE_DEPT_SQL = "update tb_dept set dname=?, dloc=? where dno=?";
     private static final String COUNT_EMP_SQL = "select count(eno) from tb_emp where eno=?";
 
