@@ -37,9 +37,9 @@ public class AddEmpServlet extends BaseServlet {
         empDTO.setNo(no);
         empDTO.setName(name);
         empDTO.setJob(job);
-        empDTO.setSex(sex);
+        empDTO.setSex(sex ? "男" : "女");
         empDTO.setSalary(salary);
-        empDTO.setStatus(true);
+        empDTO.setStatus("在职");
         empDTO.setHireDate(hireDate);
         empDTO.setTel(tel);
         EmpDTO mgr = new EmpDTO();
