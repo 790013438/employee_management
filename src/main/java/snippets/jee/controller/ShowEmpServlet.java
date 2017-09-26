@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import snippets.jee.dto.Dept;
 import snippets.jee.dto.EmpDTO;
 import snippets.jee.util.PageBean;
 
@@ -19,22 +20,25 @@ public class ShowEmpServlet extends BaseServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Dept dept = (Dept) req.getSession().getAttribute("dept");
         String noString = req.getParameter("no");
-        String name = req.getParameter("name");
-        int page = DEFAULT_PAGE;
-        String pageStr = req.getParameter("page");
-        if (pageStr != null) {
-            try {
-                page = Integer.parseInt(pageStr);
-            } catch (Exception e) {
-            }
+        int no = Integer.parseInt(noString);
+        if (dept == null || no != dept.getNo()) {
+            dept = getDeptService().getDeptByNo(no);
+            req.getSession().setAttribute("dept", dept);
         }
-        int size = DEFAULT_SIZE;
-        if (noString != null) {
-            int no = Integer.parseInt(noString);
-            req.setAttribute("deptNo", no);
-            req.setAttribute("deptName", name);
-            PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(no, page, size);
+        if (dept != null) {
+            int page = DEFAULT_PAGE;
+            String pageStr = req.getParameter("page");
+            if (pageStr != null) {
+                try {
+                    page = Integer.parseInt(pageStr);
+                    page = page <= 0 ? DEFAULT_PAGE : page;
+                } catch (NumberFormatException e) {
+                }
+            }
+            int size = DEFAULT_SIZE;
+            PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(dept.getNo(), page, size);
             req.setAttribute("empList", pageBean.getDataModel());
             req.setAttribute("totalPage", pageBean.getTotalPage());
             req.setAttribute("currentPage", pageBean.getCurrentPage());
