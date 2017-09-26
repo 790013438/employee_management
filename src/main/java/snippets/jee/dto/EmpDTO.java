@@ -3,19 +3,19 @@ package snippets.jee.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Emp implements Serializable {
+public class EmpDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private Integer no;                // 编号
     private String name;            // 姓名
-    private Boolean sex;            // 性别
+    private String sex;            // 性别
     private String job;                // 职位
-    private Emp mgr;                // 主管
+    private EmpDTO mgr;                // 主管
     private Double salary;        // 月薪
     private Date hireDate;        // 入职日期
-    private Boolean status;    // 是否在职
+    private String status;    // 是否在职
     private String photo;        // 照片(路径)
     private String tel;                // 电话号码
     private Dept dept;
@@ -32,27 +32,17 @@ public class Emp implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Boolean getSex() {
-        return sex;
-    }
 
-    public String getSexStr() {
-        return sex ? "男" : "女";
-    }
-
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
     public String getJob() {
         return job;
     }
     public void setJob(String job) {
         this.job = job;
     }
-    public Emp getMgr() {
+    public EmpDTO getMgr() {
         return mgr;
     }
-    public void setMgr(Emp mgr) {
+    public void setMgr(EmpDTO mgr) {
         this.mgr = mgr;
     }
     public Double getSalary() {
@@ -67,12 +57,7 @@ public class Emp implements Serializable {
     public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
-    public Boolean getStatus() {
-        return status;
-    }
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+
     public String getPhoto() {
         return photo;
     }
@@ -99,6 +84,18 @@ public class Emp implements Serializable {
     }
     public void setId(Integer id) {
         this.id = id;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

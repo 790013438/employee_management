@@ -1,24 +1,13 @@
 package snippets.jee.util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public final class DBResourceManager {
-    private static final String DRV = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql:///hrs?characterEncoding=utf8";
-    private static final String UID = "user1";
-    private static final String PWD = "37934bit";
+import snippets.jee.db.connection.DatabaseConnectionFactory;
 
-    static {
-        try {
-            Class.forName(DRV);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+public final class DBResourceManager {
 
     private DBResourceManager() {
         throw new AssertionError();
@@ -30,7 +19,7 @@ public final class DBResourceManager {
      */
     public static Connection openConnection() {
         try {
-            return DriverManager.getConnection(URL, UID, PWD);
+            return DatabaseConnectionFactory.getDatabaseConnectionFactory().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DbException(DbException.CONN_EX, e);

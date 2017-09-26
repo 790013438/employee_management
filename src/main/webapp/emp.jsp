@@ -31,9 +31,9 @@
                                 <tr id="tr${emp.no}">
                                     <td>${emp.no}</td>
                                     <td>${emp.name}</td>
-                                    <td>${emp.sexStr}</td>
+                                    <td>${emp.sex}</td>
                                     <td>${emp.job}</td>
-                                    <td>${emp.status ? "在职" : "离职"}</td>
+                                    <td>${emp.status}</td>
                                     <td>${emp.tel}</td>
                                     <td>
                                         <a href="">删除</a> 
@@ -43,6 +43,12 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <div align="center">
+                            <button id="firstBtn" class="btn btn-info" type="button" disabled>首页</button>				
+                            <button id="prevBtn" class="btn btn-info" type="button" disabled>上一页</button>
+                            <button id="nextBtn" class="btn btn-info" type="button" disabled>下一页</button>
+                            <button id="lastBtn" class="btn btn-info" type="button" disabled>末页</button>
+                        </div>
                     </c:if>
                     <a href="dept">返回部门列表</a>
                     <a href="addEmp?dno=${deptNo}">新增员工</a>
@@ -50,5 +56,43 @@
             </div>
         </div>
         <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(function() {
+                if (${currentPage > 1}) {
+                    $('#firstBtn').removeAttr('disabled');
+                    $('#prevBtn').removeAttr('disabled');
+                }	
+                if (${currentPage < totalPage}) {
+                    $('#nextBtn').removeAttr('disabled');
+                    $('#lastBtn').removeAttr('disabled');
+                }
+
+                var baseUrl = 'emp?no=' + ${deptNo} + '&page=';
+                $('#firstBtn').on('click', function() {
+                    $(this).attr('disabled', 'disabled');
+                    $('#prevBtn').attr('disabled', 'disabled');
+                    location.href = baseUrl + '1';
+                });
+                $('#prevBtn').on('click', function() { 
+                    if (${currentPage - 1 eq 1}) {
+                        $('#firstBtn').attr('disabled', 'disabled');
+                        $(this).attr('disabled', 'disabled');
+                    }
+                    location.href = baseUrl + ${currentPage - 1};
+                });
+                $('#nextBtn').on('click', function() { 
+                    if (${currentPage + 1 eq totalPage}) {
+                        $('#nextBtn').attr('disabled', 'disabled');
+                        $('#lastBtn').attr('disabled', 'disabled');
+                    }				
+                    location.href = baseUrl + ${currentPage + 1};
+                });
+                $('#lastBtn').on('click', function() {
+                    $('#nextBtn').attr('disabled', 'disabled');
+                    $('#lastBtn').attr('disabled', 'disabled');
+                    location.href = baseUrl + ${totalPage};
+                });
+            });
+        </script>
     </body>
 </html>
