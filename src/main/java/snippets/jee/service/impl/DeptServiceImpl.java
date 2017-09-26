@@ -28,4 +28,9 @@ private DeptDAO deptDAO = new DeptDAOImpl();
     public boolean addNewDept (Dept dept) {
         return deptDAO.save(dept);
     }
+
+    @Override
+    public Dept getDeptByNo(Integer no) {
+        return deptDao.findById(no);
+    }
 }
