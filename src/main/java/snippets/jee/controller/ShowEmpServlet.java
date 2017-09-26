@@ -22,6 +22,13 @@ public class ShowEmpServlet extends BaseServlet {
         String noString = req.getParameter("no");
         String name = req.getParameter("name");
         int page = DEFAULT_PAGE;
+        String pageStr = req.getParameter("page");
+        if (pageStr != null) {
+            try {
+                page = Integer.parseInt(pageStr);
+            } catch (Exception e) {
+            }
+        }
         int size = DEFAULT_SIZE;
         if (noString != null) {
             int no = Integer.parseInt(noString);
