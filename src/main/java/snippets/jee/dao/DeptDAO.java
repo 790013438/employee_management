@@ -28,6 +28,13 @@ public interface DeptDAO {
     boolean update(Dept dept);
 
     /**
+     * 根据部门编号查询部门
+     * @param no 部门编号
+     * @return 部门对象或null
+     */
+    Dept findById(Integer no);
+
+    /**
      * 查询所有部门
      * @return 保存部门对象的列表容器
      */

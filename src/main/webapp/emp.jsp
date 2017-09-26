@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <h1>${deptName}员工信息</h1>
+                    <h1>${dept.name}员工信息</h1>
                     <hr>
                     <c:if test="${not empty empList}">
                         <table class="table table-striped">
@@ -44,55 +44,27 @@
                             </tbody>
                         </table>
                         <div align="center">
-                            <button id="firstBtn" class="btn btn-info" type="button" disabled>首页</button>				
-                            <button id="prevBtn" class="btn btn-info" type="button" disabled>上一页</button>
-                            <button id="nextBtn" class="btn btn-info" type="button" disabled>下一页</button>
-                            <button id="lastBtn" class="btn btn-info" type="button" disabled>末页</button>
+                            <a href="emp?no=${dept.no}&page=1">首页</a>&nbsp;&nbsp;	
+                            <c:if test="${currentPage gt 1}">		
+                                <a href="emp?no=${dept.no}&page=${currentPage-1}" >上一页</a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${currentPage eq 1}">
+                                <span style="color: #ccc;">上一页</span>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${currentPage lt totalPage}">
+                                <a href="emp?no=${dept.no}&page=${currentPage+1}" >下一页</a>&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="${currentPage eq totalPage}">
+                                <span style="color: #ccc;">下一页</span>&nbsp;&nbsp;
+                            </c:if>
+                            <a href="emp?no=${dept.no}&page=${totalPage}">末页</a>
                         </div>
                     </c:if>
                     <a href="dept">返回部门列表</a>
-                    <a href="addEmp?dno=${deptNo}">新增员工</a>
+                    <a href="addEmp?dno=${dept.no}">新增员工</a>
                 </div>
             </div>
         </div>
         <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-        <script>
-            $(function() {
-                if (${currentPage > 1}) {
-                    $('#firstBtn').removeAttr('disabled');
-                    $('#prevBtn').removeAttr('disabled');
-                }	
-                if (${currentPage < totalPage}) {
-                    $('#nextBtn').removeAttr('disabled');
-                    $('#lastBtn').removeAttr('disabled');
-                }
-
-                var baseUrl = 'emp?no=' + ${deptNo} + '&page=';
-                $('#firstBtn').on('click', function() {
-                    $(this).attr('disabled', 'disabled');
-                    $('#prevBtn').attr('disabled', 'disabled');
-                    location.href = baseUrl + '1';
-                });
-                $('#prevBtn').on('click', function() { 
-                    if (${currentPage - 1 eq 1}) {
-                        $('#firstBtn').attr('disabled', 'disabled');
-                        $(this).attr('disabled', 'disabled');
-                    }
-                    location.href = baseUrl + ${currentPage - 1};
-                });
-                $('#nextBtn').on('click', function() { 
-                    if (${currentPage + 1 eq totalPage}) {
-                        $('#nextBtn').attr('disabled', 'disabled');
-                        $('#lastBtn').attr('disabled', 'disabled');
-                    }				
-                    location.href = baseUrl + ${currentPage + 1};
-                });
-                $('#lastBtn').on('click', function() {
-                    $('#nextBtn').attr('disabled', 'disabled');
-                    $('#lastBtn').attr('disabled', 'disabled');
-                    location.href = baseUrl + ${totalPage};
-                });
-            });
-        </script>
     </body>
 </html>

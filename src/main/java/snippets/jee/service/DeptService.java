@@ -21,6 +21,11 @@ public interface DeptService {
     boolean removeDeptByNo(Integer no);
 
     /**
+     * 根据部门获取部门信息
+     */
+    Dept getDeptByNo(Integer no);
+
+    /**
      * 列出所有部门
      * @return 保存部门对象的列表容器
      */
