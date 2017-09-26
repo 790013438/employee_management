@@ -23,14 +23,14 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${deptList}" var="dept">
-                            <tr id="tr${dept.no}">
+                            <tr id="tr${dept.id}">
                                 <td>${dept.no}</td>
                                 <td>
                                     <a href="emp?no=${dept.id}">${dept.name}</a>
                                 </td>
                                 <td>${dept.location}</td>
                                 <td>
-                                    <a href="javascript:deleteDept(${dept.no})">删除</a> 
+                                    <a href="javascript:deleteDept(${dept.id})">删除</a> 
                                     <a href="">编辑</a></td>
                             </tr>
                             </c:forEach>
