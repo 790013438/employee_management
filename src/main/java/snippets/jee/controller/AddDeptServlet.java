@@ -31,7 +31,7 @@ public class AddDeptServlet extends BaseServlet {
                 @SuppressWarnings("unchecked")
                 Map<Integer, Dept> map = (Map<Integer, Dept>) 
                         req.getServletContext().getAttribute("cache");
-                map.put(dept.getNo(), dept);
+                map.put(dept.getId(), dept);
                 resp.sendRedirect("dept");
             } else {
                 req.setAttribute("hint", "添加部门失败!");
