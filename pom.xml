@@ -45,6 +45,11 @@
             <artifactId>tomcat-jdbc</artifactId>
             <version>9.0.0.M15</version>
         </dependency>
+        <dependency>
+        	<groupId>com.alibaba</groupId>
+        	<artifactId>fastjson</artifactId>
+        	<version>1.2.35</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>employee_management</finalName>

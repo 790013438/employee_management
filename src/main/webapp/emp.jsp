@@ -13,58 +13,73 @@
                 <div class="col-md-12 column">
                     <h1>${dept.name}员工信息</h1>
                     <hr>
-                    <c:if test="${not empty empList}">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>编号</th>
-                                    <th>姓名</th>
-                                    <th>性别</th>
-                                    <th>职位</th>
-                                    <th>状态</th>
-                                    <th>电话</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${empList}" var="emp">
-                                <tr id="tr${emp.no}">
-                                    <td>${emp.no}</td>
-                                    <td>${emp.name}</td>
-                                    <td>${emp.sex}</td>
-                                    <td>${emp.job}</td>
-                                    <td>${emp.status}</td>
-                                    <td>${emp.tel}</td>
-                                    <td>
-                                        <a href="">删除</a> 
-                                        <a href="">编辑</a>
-                                    </td>
-                                </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <div align="center">
-                            <a href="emp?no=${dept.no}&page=1">首页</a>&nbsp;&nbsp;	
-                            <c:if test="${currentPage gt 1}">		
-                                <a href="emp?no=${dept.no}&page=${currentPage-1}" >上一页</a>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${currentPage eq 1}">
-                                <span style="color: #ccc;">上一页</span>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${currentPage lt totalPage}">
-                                <a href="emp?no=${dept.no}&page=${currentPage+1}" >下一页</a>&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="${currentPage eq totalPage}">
-                                <span style="color: #ccc;">下一页</span>&nbsp;&nbsp;
-                            </c:if>
-                            <a href="emp?no=${dept.no}&page=${totalPage}">末页</a>
-                        </div>
-                    </c:if>
+                    <table id="empInfo" class="table table-striped">
+                        <tr>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>职位</th>
+                            <th>状态</th>
+                            <th>电话</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
+                    <div align="center">
+                        <a id="first">首页</a>&nbsp;&nbsp;	
+                        <a id="prev">上一页</a>&nbsp;&nbsp;
+                        <a id="next">下一页</a>&nbsp;&nbsp;
+                        <a id="last">末页</a>
+                    </div>
                     <a href="dept">返回部门列表</a>
                     <a href="addEmp?dno=${dept.no}">新增员工</a>
                 </div>
             </div>
         </div>
         <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $(function() {
+                loadDataModel(1);
+            });
+            function loadDataModel(page) {
+                $.getJSON("emp", { 'page': page }, function(json) {
+                    var empList = json.dataModel;
+                    var prevPage = json.currentPage - 1;
+                    var nextPage = json.currentPage + 1;
+                    var lastPage = json.totalPage;
+                    if (json.currentPage > 1) {
+                        $("#first").attr("href", "javascript:loadDataModel(1)");
+                        $("#prev").attr("href", "javascript:loadDataModel(" + prevPage + ")");
+                    } else {
+                        $("#first").removeAttr("href");
+                        $("#prev").removeAttr("href");
+                    }
+                    if (json.currentPage < json.totalPage) {
+                        $("#next").attr("href", "javascript:loadDataModel(" + nextPage + ")")
+                        $("#last").attr("href", "javascript:loadDataModel(" + lastPage + ")")
+                    } else {
+                        $("#next").removeAttr("href");
+                        $("#last").removeAttr("href");
+                    }
+                    $("#empInfo tr:gt(0)").remove();
+                    for (var i = 0; i < empList.length; ++i) {
+                        var emp = empList[i];
+                        var tr = $("<tr>")
+                            .append($("<td>").text(emp.no))
+                            .append($("<td>").append($("<a>").text(emp.name).attr("href", "empDetail?no=" + emp.no))
+                            )
+                            .append($("<td>").text(emp.sex))
+                            .append($("<td>").text(emp.job))
+                            .append($("<td>").text(emp.status))
+                            .append($("<td>").text(emp.tel))
+                            .append($("<td>")
+                                .append($("<a>").text("编辑").attr("href", "editEmp?no=" + emp.no))
+                                .append("&nbsp;&nbsp;")
+                                .append($("<a>").text("删除").attr("href", "delEmp?no=" + emp.no))
+                            );
+                        $("#empInfo").append(tr);
+                    }
+                });
+            }
+        </script>
     </body>
 </html>
