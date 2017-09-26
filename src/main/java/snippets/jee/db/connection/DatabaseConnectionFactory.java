@@ -42,6 +42,7 @@ public class DatabaseConnectionFactory {
         //create Tom cat specific pool properties
         PoolProperties poolProperties = new PoolProperties();
         poolProperties.setUrl("jdbc:mysql://" + dbProperties.getProperty("db_host") + ":" + dbProperties.getProperty("db_port") + "/" + dbProperties.getProperty("db_name") + "?characterEncoding=utf8");
+        poolProperties.setDriverClassName(dbProperties.getProperty("db_driver_class_name"));
         poolProperties.setUsername(dbProperties.getProperty("db_user_name"));
         poolProperties.setPassword(dbProperties.getProperty("db_password"));
         poolProperties.setMaxActive(10);
