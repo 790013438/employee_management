@@ -24,7 +24,7 @@ public class PreLoadDataListener extends HttpServlet {
         List<Dept> deptList = deptService.listAllDepts();
         Map<Integer, Dept> cacheMap = new ConcurrentHashMap<>();
         for (Dept dept : deptList) {
-            cacheMap.put(dept.getNo(), dept);
+            cacheMap.put(dept.getId(), dept);
         }
         ServletContext servletContext = servletConfig.getServletContext();
         servletContext.setAttribute("cache", cacheMap);
