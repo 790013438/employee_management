@@ -58,7 +58,7 @@ public class AddEmpServlet extends BaseServlet {
         dept.setId(deptNo);
         empDTO.setDept(dept);
         if (getEmpService().addNewEmp(empDTO)) {
-            resp.sendRedirect("emp?no=" + deptNo);
+            resp.sendRedirect("toEmp?no=" + deptNo);
         } else {
             httpServletRequest.setAttribute("hint", "添加失败!!!");
             httpServletRequest.getRequestDispatcher("add_emp.jsp").forward(httpServletRequest, resp);
