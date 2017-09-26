@@ -13,6 +13,7 @@ import snippets.jee.util.DBResourceManager;
 
 public class DeptDAOImpl implements DeptDAO {
 
+    private static final String SELECT_DEPT_SQL = "select dname, dloc from tb_dept where dno=?";
     private static final String SELECT_ALL_DEPT_SQL = "select id, dno, dname, dloc from tb_dept";
     private static final String INSERT_DEPT_SQL = "insert into tb_dept(dno, dname, dloc) values (?,?,?)";
     private static final String DELETE_DEPT_SQL = "delete from tb_dept where dno=?";
@@ -83,6 +84,26 @@ public class DeptDAOImpl implements DeptDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("84:)", e);
+        } finally {
+            DBResourceManager.closeConnection(connection);
+        }
+    }
+
+    @Override
+    public Dept findById(Integer no) {
+        Connection connection = DBResourceManager.openConnection();
+        ResultSet rs = DBResourceManager.executeQuery(connection, SELECT_DEPT_SQL, no);
+        try {
+            Dept dept = null;
+            if (rs.next()) {
+                dept = new Dept();
+                dept.setNo(no);
+                dept.setName(rs.getString("dname"));
+                dept.setLocation(rs.getString("dloc"));
+            }
+            return dept;
+        } catch (SQLException e) {
+            throw new RuntimeException("106:)", e);
         } finally {
             DBResourceManager.closeConnection(connection);
         }
