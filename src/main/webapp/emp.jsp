@@ -65,16 +65,16 @@
                         var emp = empList[i];
                         var tr = $("<tr>")
                             .append($("<td>").text(emp.no))
-                            .append($("<td>").append($("<a>").text(emp.name).attr("href", "empDetail?no=" + emp.no))
+                            .append($("<td>").append($("<a>").text(emp.name).attr("href", "empDetail?no=" + emp.id))
                             )
                             .append($("<td>").text(emp.sex))
                             .append($("<td>").text(emp.job))
                             .append($("<td>").text(emp.status))
                             .append($("<td>").text(emp.tel))
                             .append($("<td>")
-                                .append($("<a>").text("编辑").attr("href", "editEmp?no=" + emp.no))
+                                .append($("<a>").text("编辑").attr("href", "editEmp?no=" + emp.id))
                                 .append("&nbsp;&nbsp;")
-                                .append($("<a>").text("删除").attr("href", "delEmp?no=" + emp.no))
+                                .append($("<a>").text("删除").attr("href", "delEmp?no=" + emp.id))
                             );
                         $("#empInfo").append(tr);
                     }
