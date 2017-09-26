@@ -60,9 +60,9 @@ public class EmpDAOImpl implements EmpDAO {
         Connection connection = DBResourceManager.openConnection();
         try {
             return DBResourceManager.executeUpdate(connection, INSERT_EMP_SQL, 
-                    empDTO.getNo(), empDTO.getName(), empDTO.getSex(),
+                    empDTO.getNo(), empDTO.getName(), "男".equals(empDTO.getSex()),
                     empDTO.getJob(), empDTO.getMgr().getId(), empDTO.getSalary(), 
-                    empDTO.getHireDate(), empDTO.getStatus(), empDTO.getPhoto(), 
+                    empDTO.getHireDate(), "在职".equals(empDTO.getStatus()), empDTO.getPhoto(), 
                     empDTO.getTel(), empDTO.getDept().getId()) == 1;
         } finally {
             DBResourceManager.closeConnection(connection);
