@@ -19,4 +19,10 @@ public interface EmpService {
      */
     PageBean<EmpDTO> listAllEmpsByDeptNo(Integer no, int page, int size);
 
+    /**
+     * 根据员工编号查询员工
+     * @param no 员工编号
+     * @return 员工对象或null
+     */
+    EmpDTO getEmpByNo(int no);
 }
