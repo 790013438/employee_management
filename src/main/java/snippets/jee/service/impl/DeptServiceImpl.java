@@ -31,6 +31,6 @@ private DeptDAO deptDAO = new DeptDAOImpl();
 
     @Override
     public Dept getDeptByNo(Integer no) {
-        return deptDao.findById(no);
+        return deptDAO.findById(no);
     }
 }
