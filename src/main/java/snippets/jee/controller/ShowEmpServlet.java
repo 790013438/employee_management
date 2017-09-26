@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import snippets.jee.dto.Emp;
+import snippets.jee.dto.EmpDTO;
 import snippets.jee.util.PageBean;
 
 @WebServlet("/emp")
@@ -27,7 +27,7 @@ public class ShowEmpServlet extends BaseServlet {
             int no = Integer.parseInt(noString);
             req.setAttribute("deptNo", no);
             req.setAttribute("deptName", name);
-            PageBean<Emp> pageBean = getEmpService().listAllEmpsByDeptNo(no, page, size);
+            PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(no, page, size);
             req.setAttribute("empList", pageBean.getDataModel());
             req.setAttribute("totalPage", pageBean.getTotalPage());
             req.setAttribute("currentPage", pageBean.getCurrentPage());

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import snippets.jee.dto.Dept;
-import snippets.jee.dto.Emp;
+import snippets.jee.dto.EmpDTO;
 import snippets.jee.util.CommonUtil;
 
 @WebServlet(value = "/addEmp", loadOnStartup = 1)
@@ -33,17 +33,17 @@ public class AddEmpServlet extends BaseServlet {
         String hireDateStr = httpServletRequest.getParameter("hiredate");
         Date hireDate = CommonUtil.stringToDate("yyyy-MM-dd", hireDateStr);
         String tel = httpServletRequest.getParameter("tel");
-        Emp emp = new Emp();
-        emp.setNo(no);
-        emp.setName(name);
-        emp.setJob(job);
-        emp.setSex(sex);
-        emp.setSalary(salary);
-        emp.setStatus(true);
-        emp.setHireDate(hireDate);
-        emp.setTel(tel);
-        Emp mgr = new Emp();
-        emp.setMgr(mgr);
+        EmpDTO empDTO = new EmpDTO();
+        empDTO.setNo(no);
+        empDTO.setName(name);
+        empDTO.setJob(job);
+        empDTO.setSex(sex);
+        empDTO.setSalary(salary);
+        empDTO.setStatus(true);
+        empDTO.setHireDate(hireDate);
+        empDTO.setTel(tel);
+        EmpDTO mgr = new EmpDTO();
+        empDTO.setMgr(mgr);
         Part part = httpServletRequest.getPart("photo");
         if (part.getSize() > 0) {
             String newFilename = CommonUtil.getUniqueFilename() + ".png";
@@ -51,13 +51,13 @@ public class AddEmpServlet extends BaseServlet {
             File file = new File(path + "/" + newFilename);
             file.mkdir();
             CommonUtil.compressImage(part.getInputStream(), file, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
-            emp.setPhoto(newFilename);
+            empDTO.setPhoto(newFilename);
         }
         int deptNo = Integer.parseInt(httpServletRequest.getParameter("dno"));
         Dept dept = new Dept();
         dept.setId(deptNo);
-        emp.setDept(dept);
-        if (getEmpService().addNewEmp(emp)) {
+        empDTO.setDept(dept);
+        if (getEmpService().addNewEmp(empDTO)) {
             resp.sendRedirect("emp?no=" + deptNo);
         } else {
             httpServletRequest.setAttribute("hint", "添加失败!!!");

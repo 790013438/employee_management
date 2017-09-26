@@ -1,13 +1,15 @@
+
 package snippets.jee.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import snippets.jee.dao.EmpDAO;
-import snippets.jee.dto.Emp;
+import snippets.jee.dto.EmpDTO;
 import snippets.jee.util.DBResourceManager;
 import snippets.jee.util.PageBean;
 
@@ -19,21 +21,21 @@ public class EmpDAOImpl implements EmpDAO {
         "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
 
     @Override
-    public PageBean<Emp> findEmpsByDeptNo(Integer no, int page, int size) {
+    public PageBean<EmpDTO> findEmpsByDeptNo(Integer no, int page, int size) {
         Connection connection = DBResourceManager.openConnection();
         ResultSet rs = DBResourceManager.executeQuery(connection, SELECT_EMP_BY_DEPT_SQL, no, (page - 1) * size, size);
         ResultSet rs2 = DBResourceManager.executeQuery(connection, SELECT_EMP_COUNT_SQL, no);
-        List<Emp> empList = new ArrayList<>();
+        List<EmpDTO> empList = new ArrayList<>();
         try {
             while (rs.next()) {
-                Emp emp = new Emp();
-                emp.setNo(rs.getInt("eno"));
-                emp.setName(rs.getString("ename"));
-                emp.setSex(rs.getBoolean("esex"));
-                emp.setJob(rs.getString("ejob"));
-                emp.setStatus(rs.getBoolean("estatus"));
-                emp.setTel(rs.getString("etel"));
-                empList.add(emp);
+                EmpDTO empDTO = new EmpDTO();
+                empDTO.setNo(rs.getInt("eno"));
+                empDTO.setName(rs.getString("ename"));
+                empDTO.setSex(rs.getBoolean("esex") ? "男" : "女");
+                empDTO.setJob(rs.getString("ejob"));
+                empDTO.setStatus(rs.getBoolean("estatus") ? "在职" : "离职");
+                empDTO.setTel(rs.getString("etel"));
+                empList.add(empDTO);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,20 +47,23 @@ public class EmpDAOImpl implements EmpDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e + "48:)");
+        } finally {
+            DBResourceManager.closeConnection(connection);
         }
         int totalPage = (total - 1) / size + 1;
+        empList = empList.size() > 0 ? empList : Collections.emptyList();
         return new PageBean<>(empList, totalPage, page, size);
     }
 
     @Override
-    public boolean save(Emp emp) {
+    public boolean save(EmpDTO empDTO) {
         Connection connection = DBResourceManager.openConnection();
         try {
             return DBResourceManager.executeUpdate(connection, INSERT_EMP_SQL, 
-                    emp.getNo(), emp.getName(), emp.getSex(),
-                    emp.getJob(), emp.getMgr().getId(), emp.getSalary(), 
-                    emp.getHireDate(), emp.getStatus(), emp.getPhoto(), 
-                    emp.getTel(), emp.getDept().getId()) == 1;
+                    empDTO.getNo(), empDTO.getName(), empDTO.getSex(),
+                    empDTO.getJob(), empDTO.getMgr().getId(), empDTO.getSalary(), 
+                    empDTO.getHireDate(), empDTO.getStatus(), empDTO.getPhoto(), 
+                    empDTO.getTel(), empDTO.getDept().getId()) == 1;
         } finally {
             DBResourceManager.closeConnection(connection);
         }
@@ -70,12 +75,12 @@ public class EmpDAOImpl implements EmpDAO {
     }
 
     @Override
-    public boolean update(Emp emp) {
+    public boolean update(EmpDTO empDTO) {
         return false;
     }
 
     @Override
-    public Emp findByNo(Integer no) {
+    public EmpDTO findByNo(Integer no) {
         return null;
     }
 }

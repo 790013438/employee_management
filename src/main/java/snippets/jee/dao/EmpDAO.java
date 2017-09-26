@@ -1,6 +1,6 @@
 package snippets.jee.dao;
 
-import snippets.jee.dto.Emp;
+import snippets.jee.dto.EmpDTO;
 import snippets.jee.util.PageBean;
 
 public interface EmpDAO {
@@ -10,14 +10,14 @@ public interface EmpDAO {
      * @param no 部门编号
      * @return 保存员工对象的列表容器
      */
-    PageBean<Emp> findEmpsByDeptNo(Integer no, int page, int size);
+    PageBean<EmpDTO> findEmpsByDeptNo(Integer no, int page, int size);
 
     /**
      * 保存员工
-     * @param emp 员工对象
+     * @param empDTO 员工对象
      * @return 保存成功返回true否则返回false
      */
-    boolean save(Emp emp);
+    boolean save(EmpDTO empDTO);
 
     /**
      * 删除员工
@@ -28,16 +28,16 @@ public interface EmpDAO {
 
     /**
      * 更新员工
-     * @param emp 员工对象
+     * @param empDTO 员工对象
      * @return 更新成功返回true否则返回false
      */
-    boolean update(Emp emp);
+    boolean update(EmpDTO empDTO);
 
     /**
      * 根据员工编号查找员工
      * @param no 员工编号
      * @return 员工对象或null
      */
-    Emp findByNo(Integer no);
+    EmpDTO findByNo(Integer no);
 
 }
