@@ -1,6 +1,7 @@
 package snippets.jee.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +26,18 @@ public class UpdateDetp extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Dept deptDTO = (Dept) req.getSession().getAttribute("dept");
         try {
-            Dept deptDTO = (Dept) req.getSession().getAttribute("dept");
             getDeptService().updateDept(deptDTO);
         } catch (Throwable th) {
             req.setAttribute("hint", "更新失败:)" + th.getMessage());
             resp.sendRedirect("updateDept");
         }
+     // 如果添加部门成功则先刷新缓存数据再重定向到查看部门页面
+        @SuppressWarnings("unchecked")
+        Map<Integer, Dept> map = (Map<Integer, Dept>) 
+                req.getServletContext().getAttribute("cache");
+        map.put(deptDTO.getId(), deptDTO);
         resp.sendRedirect("dept");
     }
 
