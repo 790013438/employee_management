@@ -16,7 +16,6 @@
         <c:set var="actionPath" value="${pageContext.request.contextPath}/updateDept"/>
         <form action="${actionPath}" method="post">
             <input type="number" name="no" value="${dept.no}" required placeholder="请修改部门编号">
-            //TODO modify
             <br><br>
             <input type="text" name="name" value="${dept.name}" required placeholder="请修改部门名称">
             <br><br>

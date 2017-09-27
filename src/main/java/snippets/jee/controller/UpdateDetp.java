@@ -30,9 +30,9 @@ public class UpdateDetp extends BaseServlet {
             getDeptService().updateDept(deptDTO);
         } catch (Throwable th) {
             req.setAttribute("hint", "更新失败:)" + th.getMessage());
-            resp.sendRedirect("/updateDept");
+            resp.sendRedirect("updateDept");
         }
-        resp.sendRedirect("/dept");
+        resp.sendRedirect("dept");
     }
 
     
