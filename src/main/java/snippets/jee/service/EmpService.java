@@ -26,5 +26,5 @@ public interface EmpService {
      */
     EmpDTO getEmpByNo(int no);
 
-    boolean removeDeptByNo(Integer no);
+    boolean removeEmpByNo(Integer no);
 }

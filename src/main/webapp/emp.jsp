@@ -75,9 +75,9 @@
                             .append($("<td>").text(emp.status))
                             .append($("<td>").text(emp.tel))
                             .append($("<td>")
-                                .append($("<a>").text("编辑").attr("href", "editEmp?no=" + ${emp.id}))
+                                .append($("<a>").text("编辑").attr("href", "editEmp?no=" + emp.id))
                                 .append("&nbsp;&nbsp;")
-                                .append($("<a>").text("删除").attr("href", "delEmp?no=" + ${emp.id}))
+                                .append($("<a>").text("删除").attr("href", "delEmp?no=" + emp.id))
                             );
                         $("#empInfo").append(tr);
                     }

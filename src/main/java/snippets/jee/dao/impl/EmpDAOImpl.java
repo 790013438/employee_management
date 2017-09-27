@@ -15,7 +15,7 @@ import snippets.jee.util.PageBean;
 
 public class EmpDAOImpl implements EmpDAO {
     private static final String SELECT_EMP_BY_DEPT_SQL = 
-        "select eno, ename, esex, ejob, estatus, etel from tb_emp where tb_dept_id=? limit ?,?";
+        "select id, eno, ename, esex, ejob, estatus, etel from tb_emp where tb_dept_id=? limit ?,?";
     private static final String SELECT_EMP_COUNT_SQL = "select count(eno) from tb_emp where tb_dept_id=?";
     private static final String INSERT_EMP_SQL =
         "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
@@ -31,6 +31,7 @@ public class EmpDAOImpl implements EmpDAO {
         try {
             while (rs.next()) {
                 EmpDTO empDTO = new EmpDTO();
+                empDTO.setId(rs.getInt("id"));
                 empDTO.setNo(rs.getInt("eno"));
                 empDTO.setName(rs.getString("ename"));
                 empDTO.setSex(rs.getBoolean("esex") ? "男" : "女");

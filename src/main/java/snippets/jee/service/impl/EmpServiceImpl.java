@@ -25,7 +25,7 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public boolean removeDeptByNo(Integer no) {
+    public boolean removeEmpByNo(Integer no) {
         return empDAO.deleteByNo(no);
     }
 }
