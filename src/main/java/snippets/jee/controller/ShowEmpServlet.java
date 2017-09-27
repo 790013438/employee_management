@@ -35,7 +35,7 @@ public class ShowEmpServlet extends BaseServlet {
                 }
             }
             int size = DEFAULT_SIZE;
-            PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(dept.getNo(), page, size);
+            PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(dept.getId(), page, size);
             // 1. 将对象转换成JSON格式的字符串返回给浏览器
             String jsonStr = JSON.toJSONString(pageBean);
             // 2. 把JSON字符串输出到浏览器通过MIME类型告诉浏览器这里是JSON格式
