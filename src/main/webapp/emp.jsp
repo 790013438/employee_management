@@ -31,7 +31,7 @@
                         <a id="last">末页</a>
                     </div>
                     <a href="dept">返回部门列表</a>
-                    <a href="addEmp?dno=${dept.no}">新增员工</a>
+                    <a href="addEmp?dno=${dept.id}">新增员工</a>
                 </div>
             </div>
         </div>
