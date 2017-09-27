@@ -1,5 +1,6 @@
 package snippets.jee.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import snippets.jee.dao.DeptDAO;
@@ -25,7 +26,7 @@ private DeptDAO deptDAO = new DeptDAOImpl();
     }
 
     @Override
-    public boolean addNewDept (Dept dept) {
+    public boolean addNewDept (Dept dept) throws SQLException {
         return deptDAO.save(dept);
     }
 

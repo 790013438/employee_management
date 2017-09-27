@@ -1,5 +1,6 @@
 package snippets.jee.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import snippets.jee.dto.Dept;
@@ -10,8 +11,9 @@ public interface DeptDAO {
      * 保存部门
      * @param dept 部门对象
      * @return 保存成功返回true否则返回false
+     * @throws SQLException 
      */
-    boolean save(Dept dept);
+    boolean save(Dept dept) throws SQLException;
 
     /**
      * 删除部门

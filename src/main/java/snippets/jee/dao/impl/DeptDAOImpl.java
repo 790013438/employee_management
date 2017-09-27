@@ -1,11 +1,14 @@
 package snippets.jee.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.mysql.jdbc.Statement;
 
 import snippets.jee.dao.DeptDAO;
 import snippets.jee.dto.Dept;
@@ -15,17 +18,35 @@ public class DeptDAOImpl implements DeptDAO {
 
     private static final String SELECT_DEPT_SQL = "select dname, dloc from tb_dept where id=?";
     private static final String SELECT_ALL_DEPT_SQL = "select id, dno, dname, dloc from tb_dept";
-    private static final String INSERT_DEPT_SQL = "insert into tb_dept(dno, dname, dloc) values (?,?,?)";
     private static final String DELETE_DEPT_SQL = "delete from tb_dept where id=?";
     private static final String UPDATE_DEPT_SQL = "update tb_dept set dname=?, dloc=? where dno=?";
     private static final String COUNT_EMP_SQL = "select count(eno) from tb_emp where eno=?";
 
     @Override
-    public boolean save(Dept dept) {
+    public boolean save(Dept dept) throws SQLException {
         Connection connection = DBResourceManager.openConnection();
         try {
-            return DBResourceManager.executeUpdate(connection, INSERT_DEPT_SQL, 
-                    dept.getNo(), dept.getName(), dept.getLocation()) == 1;
+            final String sql = "insert into tb_dept(dno, dname, dloc) values (?, ?, ?)";
+            //create the prepared statement with an option to get auto generated keys
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            //set parameters
+            preparedStatement.setInt(1, dept.getNo());
+            preparedStatement.setString(2, dept.getName());
+            preparedStatement.setString(3, dept.getLocation());
+
+            int i = preparedStatement.executeUpdate();
+
+            //Get auto-generated keys
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                dept.setId(resultSet.getInt(1));
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            return i == 1;
         } finally {
             DBResourceManager.closeConnection(connection);
         }
