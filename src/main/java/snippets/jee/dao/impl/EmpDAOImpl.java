@@ -19,6 +19,8 @@ public class EmpDAOImpl implements EmpDAO {
     private static final String SELECT_EMP_COUNT_SQL = "select count(eno) from tb_emp where tb_dept_id=?";
     private static final String INSERT_EMP_SQL =
         "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SELECT_EMP_SQL = 
+            "select ephoto from tb_emp where eno=?";
 
     @Override
     public PageBean<EmpDTO> findEmpsByDeptNo(Integer no, int page, int size) {
@@ -81,6 +83,19 @@ public class EmpDAOImpl implements EmpDAO {
 
     @Override
     public EmpDTO findByNo(Integer no) {
-        return null;
+        Connection connection = DBResourceManager.openConnection();
+        ResultSet rs = DBResourceManager.executeQuery(connection, SELECT_EMP_SQL, no);
+        try {
+            EmpDTO emp = null;
+            if (rs.next()) {
+                emp = new EmpDTO();
+                emp.setPhoto(rs.getString("ephoto"));
+            }
+            return emp;
+        } catch (SQLException e) {
+            throw new RuntimeException("96 查找单个员工:)", e);
+        } finally {
+            DBResourceManager.closeConnection(connection);
+        }
     }
 }

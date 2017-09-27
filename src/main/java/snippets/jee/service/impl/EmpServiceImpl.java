@@ -18,4 +18,9 @@ public class EmpServiceImpl implements EmpService {
     public PageBean<EmpDTO> listAllEmpsByDeptNo(Integer no, int page, int size) {
         return empDao.findEmpsByDeptNo(no, page, size);
     }
+
+    @Override
+    public EmpDTO getEmpByNo(int no) {
+        return empDao.findByNo(no);
+    }
 }

@@ -1,11 +1,14 @@
 package snippets.jee.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 
 import snippets.jee.dto.Dept;
 import snippets.jee.dto.EmpDTO;
@@ -21,12 +24,6 @@ public class ShowEmpServlet extends BaseServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Dept dept = (Dept) req.getSession().getAttribute("dept");
-        String noString = req.getParameter("no");
-        int no = Integer.parseInt(noString);
-        if (dept == null || no != dept.getNo()) {
-            dept = getDeptService().getDeptByNo(no);
-            req.getSession().setAttribute("dept", dept);
-        }
         if (dept != null) {
             int page = DEFAULT_PAGE;
             String pageStr = req.getParameter("page");
@@ -39,10 +36,13 @@ public class ShowEmpServlet extends BaseServlet {
             }
             int size = DEFAULT_SIZE;
             PageBean<EmpDTO> pageBean = getEmpService().listAllEmpsByDeptNo(dept.getNo(), page, size);
-            req.setAttribute("empList", pageBean.getDataModel());
-            req.setAttribute("totalPage", pageBean.getTotalPage());
-            req.setAttribute("currentPage", pageBean.getCurrentPage());
-            req.getRequestDispatcher("emp.jsp").forward(req, resp);
+            // 1. 将对象转换成JSON格式的字符串返回给浏览器
+            String jsonStr = JSON.toJSONString(pageBean);
+            // 2. 把JSON字符串输出到浏览器通过MIME类型告诉浏览器这里是JSON格式
+            resp.setContentType("application/json;charset=utf-8");
+            PrintWriter printWriter = resp.getWriter();
+            printWriter.write(jsonStr);
+            printWriter.close();
         }
     }
 }

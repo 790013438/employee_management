@@ -25,7 +25,7 @@ public class RegServlet extends BaseServlet {
             user.setPassword(password);
             user.setEmail(email);
             if (getUserService().register(user)) {
-                resp.sendRedirect("login.jsp");
+                resp.sendRedirect("login");
             } else {
                 req.setAttribute("hint", "注册失败! 请尝试更换用户名!");
                 req.getRequestDispatcher("register.jsp").forward(req, resp);

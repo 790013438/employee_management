@@ -26,7 +26,7 @@
                             <tr id="tr${dept.id}">
                                 <td>${dept.no}</td>
                                 <td>
-                                    <a href="emp?no=${dept.id}">${dept.name}</a>
+                                    <a href="toEmp?no=${dept.id}">${dept.name}</a>
                                 </td>
                                 <td>${dept.location}</td>
                                 <td>
