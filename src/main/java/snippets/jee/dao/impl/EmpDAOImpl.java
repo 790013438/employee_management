@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import snippets.jee.dao.EmpDAO;
@@ -20,7 +21,7 @@ public class EmpDAOImpl implements EmpDAO {
     private static final String INSERT_EMP_SQL =
         "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SELECT_EMP_SQL = 
-            "select ephoto from tb_emp where id=?";
+            "select id, eno, ename, esex, ejob, ehiredate, estatus, ephoto from tb_emp where id=?";
 
     @Override
     public PageBean<EmpDTO> findEmpsByDeptNo(Integer no, int page, int size) {
@@ -84,7 +85,16 @@ public class EmpDAOImpl implements EmpDAO {
 
     @Override
     public boolean update(EmpDTO empDTO) {
-        return false;
+        Connection connection = DBResourceManager.openConnection();
+        try {
+            return DBResourceManager.executeUpdate(connection, "update tb_emp set eno=?, ename=?, esex=?, ejob=?, esal=?, ehiredate=?, ephoto=?, ephone=? where id=?", 
+                    empDTO.getNo(), empDTO.getName(), "男".equals(empDTO.getSex()),
+                    empDTO.getJob(), empDTO.getMgr().getId(), empDTO.getSalary(), 
+                    empDTO.getHireDate(), "在职".equals(empDTO.getStatus()), empDTO.getPhoto(), 
+                    empDTO.getTel(), empDTO.getDept().getId()) == 1;
+        } finally {
+            DBResourceManager.closeConnection(connection);
+        }
     }
 
     @Override
@@ -95,6 +105,13 @@ public class EmpDAOImpl implements EmpDAO {
             EmpDTO emp = null;
             if (rs.next()) {
                 emp = new EmpDTO();
+                emp.setId(rs.getInt("id"));
+                emp.setNo(rs.getInt("eno"));
+                emp.setName(rs.getString("ename"));
+                emp.setSex(rs.getBoolean("esex") ? "男" : "女");
+                emp.setJob(rs.getString("ejob"));
+                emp.setHireDate(new Date(rs.getDate("ehiredate").getTime()));
+                emp.setStatus(rs.getInt("estatus") == 1 ? "在职" : "离职");
                 emp.setPhoto(rs.getString("ephoto"));
             }
             return emp;

@@ -98,4 +98,8 @@ public class EmpDTO implements Serializable {
         this.status = status;
     }
 
+    public int getSexInt() {
+        return "男".equals(getSex()) ? 1 : 0;
+    }
+
 }

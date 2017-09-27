@@ -27,4 +27,6 @@ public interface EmpService {
     EmpDTO getEmpByNo(int no);
 
     boolean removeEmpByNo(Integer no);
+
+    void updateEmp(EmpDTO deptDTO);
 }
