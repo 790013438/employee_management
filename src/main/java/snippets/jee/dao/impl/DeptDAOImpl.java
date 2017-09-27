@@ -16,7 +16,7 @@ import snippets.jee.util.DBResourceManager;
 
 public class DeptDAOImpl implements DeptDAO {
 
-    private static final String SELECT_DEPT_SQL = "select dname, dloc from tb_dept where id=?";
+    private static final String SELECT_DEPT_SQL = "select dno, dname, dloc from tb_dept where id=?";
     private static final String SELECT_ALL_DEPT_SQL = "select id, dno, dname, dloc from tb_dept";
     private static final String DELETE_DEPT_SQL = "delete from tb_dept where id=?";
     private static final String UPDATE_DEPT_SQL = "update tb_dept set dname=?, dloc=? where dno=?";
@@ -118,7 +118,8 @@ public class DeptDAOImpl implements DeptDAO {
             Dept dept = null;
             if (rs.next()) {
                 dept = new Dept();
-                dept.setNo(no);
+                dept.setId(no);
+                dept.setNo(rs.getInt("dno"));
                 dept.setName(rs.getString("dname"));
                 dept.setLocation(rs.getString("dloc"));
             }
