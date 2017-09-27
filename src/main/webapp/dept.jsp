@@ -31,7 +31,7 @@
                                 <td>${dept.location}</td>
                                 <td>
                                     <a href="javascript:deleteDept(${dept.id})">删除</a> 
-                                    <a href="">编辑</a></td>
+                                    <a href="updateDept?id=${dept.id}">编辑</a></td>
                             </tr>
                             </c:forEach>
                         </tbody>

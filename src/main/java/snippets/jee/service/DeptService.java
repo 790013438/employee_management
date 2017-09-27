@@ -33,4 +33,5 @@ public interface DeptService {
      */
     List<Dept> listAllDepts();
 
+    public void updateDept (final Dept deptDTO);
 }

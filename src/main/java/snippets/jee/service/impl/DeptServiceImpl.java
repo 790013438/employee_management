@@ -34,4 +34,11 @@ private DeptDAO deptDAO = new DeptDAOImpl();
     public Dept getDeptByNo(Integer no) {
         return deptDAO.findById(no);
     }
+
+    @Override
+    public void updateDept(Dept deptDTO) {
+        deptDAO.update(deptDTO);
+    }
+
+    
 }
