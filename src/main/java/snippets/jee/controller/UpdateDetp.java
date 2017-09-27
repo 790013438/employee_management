@@ -26,7 +26,19 @@ public class UpdateDetp extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Dept deptDTO = (Dept) req.getSession().getAttribute("dept");
+        String idString = req.getParameter("id");
+        String noString = req.getParameter("no");
+        String name = req.getParameter("name");
+        String location = req.getParameter("location");
+        Dept deptDTO = new Dept();
+        if (noString != null) {
+            int id = Integer.parseInt(idString);
+            int no = Integer.parseInt(noString);
+            deptDTO.setId(id);
+            deptDTO.setNo(no);
+            deptDTO.setName(name);
+            deptDTO.setLocation(location);
+        }
         try {
             getDeptService().updateDept(deptDTO);
         } catch (Throwable th) {
