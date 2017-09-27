@@ -13,6 +13,9 @@
                 <div class="col-md-12 column">
                     <h1>${dept.name}员工信息</h1>
                     <hr>
+                    <c:if test="${not empty hint}">
+                        <span style="color='red''">${hint}</span>
+                    </c:if>
                     <table id="empInfo" class="table table-striped">
                         <tr>
                             <th>编号</th>

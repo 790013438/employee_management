@@ -7,20 +7,25 @@ import snippets.jee.service.EmpService;
 import snippets.jee.util.PageBean;
 
 public class EmpServiceImpl implements EmpService {
-    private EmpDAO empDao = new EmpDAOImpl();
+    private EmpDAO empDAO = new EmpDAOImpl();
 
     @Override
     public boolean addNewEmp(EmpDTO empDTO) {
-        return empDao.save(empDTO);
+        return empDAO.save(empDTO);
     }
 
     @Override
     public PageBean<EmpDTO> listAllEmpsByDeptNo(Integer no, int page, int size) {
-        return empDao.findEmpsByDeptNo(no, page, size);
+        return empDAO.findEmpsByDeptNo(no, page, size);
     }
 
     @Override
     public EmpDTO getEmpByNo(int no) {
-        return empDao.findByNo(no);
+        return empDAO.findByNo(no);
+    }
+
+    @Override
+    public boolean removeDeptByNo(Integer no) {
+        return empDAO.deleteByNo(no);
     }
 }

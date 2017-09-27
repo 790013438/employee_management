@@ -14,7 +14,7 @@
     <body>
         <h1>更改部门</h1>
         <hr>
-        <c:if test="not empty hint">
+        <c:if test="${not empty hint}">
             <span style="color:red; font-size: 12px;">${hint}</span>
         </c:if>
 

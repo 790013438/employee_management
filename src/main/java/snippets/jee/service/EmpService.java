@@ -25,4 +25,6 @@ public interface EmpService {
      * @return 员工对象或null
      */
     EmpDTO getEmpByNo(int no);
+
+    boolean removeDeptByNo(Integer no);
 }

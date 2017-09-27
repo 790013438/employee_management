@@ -20,7 +20,7 @@ public class EmpDAOImpl implements EmpDAO {
     private static final String INSERT_EMP_SQL =
         "insert into tb_emp(eno, ename, esex, ejob, tb_emp_id, esal, ehiredate, estatus, ephoto, etel, tb_dept_id) values (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SELECT_EMP_SQL = 
-            "select ephoto from tb_emp where eno=?";
+            "select ephoto from tb_emp where id=?";
 
     @Override
     public PageBean<EmpDTO> findEmpsByDeptNo(Integer no, int page, int size) {
@@ -73,7 +73,12 @@ public class EmpDAOImpl implements EmpDAO {
 
     @Override
     public boolean deleteByNo(Integer no) {
-        return false;
+        Connection connection = DBResourceManager.openConnection();
+        try {
+            return DBResourceManager.executeUpdate(connection, "delete from tb_emp where id = ?", no) == 1;
+        } finally {
+            DBResourceManager.closeConnection(connection);
+        }
     }
 
     @Override
